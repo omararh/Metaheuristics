@@ -1,6 +1,6 @@
 import networkx as nx
 from src.ValidatorService import Validator
-
+import random
 
 class Solution:
 
@@ -39,9 +39,11 @@ class Solution:
     @staticmethod
     def generateNeighbor(G):
         coloring = nx.get_node_attributes(G, 'color')
-        max_color_node = max(coloring, key=coloring.get)
-        new_color = Solution.findSmallestValidColorForNode(G, coloring, max_color_node)
-        coloring[max_color_node] = new_color
+        nodes = list(G.nodes())
+        random.shuffle(nodes)
+        randomlyChosenNode = nodes[0]
+        new_color = Solution.findSmallestValidColorForNode(G, coloring, randomlyChosenNode)
+        coloring[randomlyChosenNode] = new_color
         nx.set_node_attributes(G, coloring, 'color')
         return G
 
