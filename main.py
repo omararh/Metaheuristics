@@ -13,7 +13,7 @@ if __name__ == "__main__":
     G = GraphParser.parseFile(file_path)
     G = Solution.generateInitialSolution(G)
     print("result for initial solution ---> ", Validator.objectiveFunction(G))
-
+    # to try : 10 000 it, 50 v
     tabuSearch = TabuSearch(G, 1000, 100)
     tabuSearch.search()
     bestSolution = tabuSearch.getBestSolution()

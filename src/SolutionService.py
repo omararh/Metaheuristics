@@ -1,5 +1,6 @@
 import networkx as nx
 from src.ValidatorService import Validator
+from src.GraphParserService import GraphParser
 import random
 
 
@@ -36,7 +37,7 @@ class Solution:
             chosen_color = random.choice(list(available_colors))
             coloring[node] = chosen_color
 
-        nx.set_node_attributes(G, coloring, 'color')
+        Solution.assignColorsToGraph(G, coloring)
         return G
 
     @staticmethod
@@ -70,13 +71,13 @@ class Solution:
 
     @staticmethod
     def generateNeighbor(G):
-        coloring = nx.get_node_attributes(G, 'color')
+        coloring = GraphParser.getColoringFromGraph(G)
         nodes = list(G.nodes())
         random.shuffle(nodes)
         randomlyChosenNode = nodes[0]
         new_color = Solution.findSmallestValidColorForNode(G, coloring, randomlyChosenNode)
         coloring[randomlyChosenNode] = new_color
-        nx.set_node_attributes(G, coloring, 'color')
+        Solution.assignColorsToGraph(G, coloring)
         return G
 
     @staticmethod
