@@ -2,6 +2,7 @@ import networkx as nx
 from src.ValidatorService import Validator
 import random
 
+
 class Solution:
 
     @staticmethod
@@ -18,13 +19,21 @@ class Solution:
     @staticmethod
     def generateInitialSolution(G):
         """
-        Generates initial solution graph with glouton algorithm
+        Generates an initial solution graph using a custom glouton coloring algorithm.
         :param Graph G:
-        :return Graph G:
+        :return: Graph G with colors assigned to nodes
         """
-        coloring = nx.coloring.greedy_color(G, strategy="largest_first")
-        #increment colors by 1 to make the coloration starting from 1 and not 0
-        coloring = {node: color + 1 for node, color in coloring.items()}
+        coloring = {}
+        nodes = sorted(G.nodes(), key=lambda x: G.degree[x], reverse=True)
+        for node in nodes:
+            neighbor_colors = set()
+            for neighbor in G.neighbors(node):
+                if neighbor in coloring:
+                    neighbor_colors.add(coloring[neighbor])
+            color = 1
+            while color in neighbor_colors:
+                color += 1
+            coloring[node] = color
         G = Solution.assignColorsToGraph(G, coloring)
         return G
 
