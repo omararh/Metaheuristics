@@ -12,7 +12,7 @@ class LocalSearch:
         self.nbMaxIt = nbMaxIt
 
     def setInitialSolution(self):
-        initialSolution = Solution.generateInitialSolution(self.parsedGraph)
+        initialSolution = Solution.generateInitialSolutionRandomly(self.parsedGraph)
         self.currentSolution = initialSolution
         self.bestSolution = initialSolution
 

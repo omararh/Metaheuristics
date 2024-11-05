@@ -17,6 +17,29 @@ class Solution:
         return G
 
     @staticmethod
+    def generateInitialSolutionRandomly(G):
+        """
+        Generates an initial solution graph by assigning random colors to nodes
+        while ensuring no two adjacent nodes have the same color.
+        :param Graph G: The graph to color
+        :return: Graph G with colors assigned randomly to nodes
+        """
+        coloring = {}
+        # Generate a pool of possible colors
+        colors = list(range(1, len(G.nodes()) + 1))
+
+        for node in G.nodes():
+            available_colors = set(colors)
+            for neighbor in G.neighbors(node):
+                if neighbor in coloring:
+                    available_colors.discard(coloring[neighbor])
+            chosen_color = random.choice(list(available_colors))
+            coloring[node] = chosen_color
+
+        nx.set_node_attributes(G, coloring, 'color')
+        return G
+
+    @staticmethod
     def generateInitialSolution(G):
         """
         Generates an initial solution graph using a custom glouton coloring algorithm.
