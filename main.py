@@ -12,23 +12,26 @@ if __name__ == "__main__":
     file_path = "Utils/Graphs/dsjc500.1.col"
 
     G = GraphParser.parseFile(file_path)
-    G = Solution.generateInitialSolution(G)
-    print("result for initial solution ---> ", Validator.objectiveFunction(G))
-    '''
-    # to try : 10 000 it, 50 
-    tabuSearch = TabuSearch(G, 1000, 100)
-    tabuSearch.search()
-    bestSolution = tabuSearch.getBestSolution()
-    print("result for best solution ---> ", Validator.objectiveFunction(bestSolution))
-    '''
+    G = Solution.greedyAlgoSolution(G)
+    print("result for greedyAlgo solution ---> ", Validator.objectiveFunction(G))
+    print("number of used colors ---> ", GraphParser.getNbOfColorsUsed(G))
 
     T0 = 100  # Température initiale
     Tf = 0.01  # Température finale
     alpha = 0.95  # Facteur de refroidissement
-    nbMaxIt = 10000000  # Nombre maximal d'itérations
-    nbNeighbors = 500  # Nombre de voisins par itération
+    nbMaxIt = 1000  # Nombre maximal d'itérations
+    nbNeighbors = 50  # Nombre de voisins par itération
+
+    # to try : 10 000 it, 50
+    tabuSearch = TabuSearch(G, nbMaxIt, nbNeighbors)
+    tabuSearch.search()
+    bestSolution = tabuSearch.getBestSolution()
+    print("result for best solution N1 ---> ", Validator.objectiveFunction(bestSolution))
+    print("number of used colors ---> ", GraphParser.getNbOfColorsUsed(bestSolution))
 
     simulatedAnnealing = SimulatedAnnealing(G, T0, Tf, alpha, nbMaxIt, nbNeighbors)
     simulatedAnnealing.search()
     bestSolution = simulatedAnnealing.getBestSolution()
-    print("result for best solution ---> ", Validator.objectiveFunction(bestSolution))
+    print("result for best solution N2 ---> ", Validator.objectiveFunction(bestSolution))
+    print("number of used colors ---> ", GraphParser.getNbOfColorsUsed(bestSolution))
+

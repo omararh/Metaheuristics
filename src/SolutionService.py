@@ -41,7 +41,7 @@ class Solution:
         return G
 
     @staticmethod
-    def generateInitialSolution(G):
+    def greedyAlgoSolution(G):
         """
         Generates an initial solution graph using a custom glouton coloring algorithm.
         :param Graph G:
@@ -71,6 +71,11 @@ class Solution:
 
     @staticmethod
     def generateNeighbor(G):
+        """
+        choose a random node and give it the best color possible
+        :param G:
+        :return G:
+        """
         coloring = GraphParser.getColoringFromGraph(G)
         nodes = list(G.nodes())
         random.shuffle(nodes)
@@ -88,7 +93,7 @@ class Solution:
         neighbors : List<Graph>
 
         return
-        currentSolution : Graph (improved)
+        currentSolution : Graph (improved if not randomly chosen)
         """
         current_objective = Validator.objectiveFunction(currentSolution)
         hasChanged = False

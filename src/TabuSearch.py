@@ -30,12 +30,17 @@ class TabuSearch(LocalSearch):
         """
         self.setInitialSolution()
         cp = 0
+        max_tabu_size = max(1, self.nbNeighbors // 10)
         while cp < self.nbMaxIt:
             self.generateNeighborhood()
             savedCurrentSolution = self.currentSolution
             self.updateCurrentSolution()
             self.rollBackOnSolutionUpdate(savedCurrentSolution)
+
             self.tabuList.append(self.currentSolution)
+            if len(self.tabuList) > max_tabu_size:
+                self.tabuList.pop(0)
+
             self.updateBestSolution()
             self.cleanNeighborhood()
             cp += 1
