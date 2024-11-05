@@ -91,13 +91,16 @@ class Solution:
         currentSolution : Graph (improved)
         """
         current_objective = Validator.objectiveFunction(currentSolution)
-
+        hasChanged = False
         for neighbor in neighbors:
             neighbor_objective = Validator.objectiveFunction(neighbor)
             if neighbor_objective < current_objective:
                 current_objective = neighbor_objective
                 currentSolution = neighbor
+                hasChanged = True
 
+        if not hasChanged:
+            currentSolution = random.choice(neighbors)
         return currentSolution
 
     @staticmethod
