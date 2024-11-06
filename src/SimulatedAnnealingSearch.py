@@ -40,15 +40,15 @@ class SimulatedAnnealing(LocalSearch):
         cp = 0
         while self.currentTemperature > self.Tf and cp < self.nbMaxIt:
             self.generateNeighborhood()
-            savedCurrentSolution = self.currentSolution
-            self.updateCurrentSolution()
+            chosenNeighbor = random.choice(self.neighbors)
 
-            objectiveSolution = Validator.objectiveFunction(savedCurrentSolution)
-            objectiveUpdatedSolution = Validator.objectiveFunction(self.currentSolution)
-            delta_f = objectiveUpdatedSolution - objectiveSolution
+            objectiveSolution = Validator.objectiveFunction(self.currentSolution)
+            objectiveNeighborSolution = Validator.objectiveFunction(chosenNeighbor)
+            delta_f = objectiveNeighborSolution - objectiveSolution
 
-            if random.random() >= SimulatedAnnealing.acceptanceProbability(delta_f, self.currentTemperature):
-                self.currentSolution = savedCurrentSolution
+            if (delta_f < 0 or
+                    random.random() < SimulatedAnnealing.acceptanceProbability(delta_f, self.currentTemperature)):
+                self.currentSolution = chosenNeighbor
 
             self.cleanNeighborhood()
             self.coolDown()
