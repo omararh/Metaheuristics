@@ -42,17 +42,6 @@ class GraphParser:
         return nx.get_node_attributes(G, 'color')
 
     @staticmethod
-    def getNbOfColorsUsed(G):
-        """
-        get the number of used colors
-        :param G:
-        :return int nb of colors:
-        """
-        coloring = GraphParser.getColoringFromGraph(G)
-        unique_colors = set(coloring.values())
-        return len(unique_colors)
-
-    @staticmethod
     def convertColoringToResultFile(coloring):
         """
         after getting the best solution we want to store the coloring of the
