@@ -47,9 +47,7 @@ class SimulatedAnnealing(LocalSearch):
             objectiveUpdatedSolution = Validator.objectiveFunction(self.currentSolution)
             delta_f = objectiveUpdatedSolution - objectiveSolution
 
-            if random.random() < SimulatedAnnealing.acceptanceProbability(delta_f, self.currentTemperature):
-                self.updateCurrentSolution()
-            else:
+            if random.random() >= SimulatedAnnealing.acceptanceProbability(delta_f, self.currentTemperature):
                 self.currentSolution = savedCurrentSolution
 
             self.cleanNeighborhood()
