@@ -14,6 +14,7 @@ if __name__ == "__main__":
     G = Solution.greedyAlgoSolution(G)
     #print("result for greedyAlgo solution ---> ", Validator.objectiveFunction(G))
 
+    # MetaHeuristics parameters
     T0 = 100  # Température initiale
     Tf = 0.01  # Température finale
     alpha = 0.95  # Facteur de refroidissement
@@ -28,4 +29,4 @@ if __name__ == "__main__":
     simulatedAnnealing = SimulatedAnnealing(G, T0, Tf, alpha, nbMaxIt, nbNeighbors)
     simulatedAnnealing.search()
     bestSolution = simulatedAnnealing.getBestSolution()
-    print("Simulated annealing best solution N2 ---> ", Validator.objectiveFunction(bestSolution))
+    print("Simulated annealing best solution ---> ", Validator.objectiveFunction(bestSolution))
