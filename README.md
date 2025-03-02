@@ -1,8 +1,6 @@
 # MetaHeuristicProject
 
-### To run the project : 
-`pip install networkx`  
-`python main.py`
+Metaheuristics are advanced optimization algorithms designed to solve complex computational problems by efficiently searching through large solution spaces where traditional methods fail. They employ high-level problem-independent strategies that balance exploration of the search space with exploitation of promising areas, making them particularly effective for NP-hard problems like graph coloring, traveling salesman, and scheduling problems.
 
 # Graph Coloring with Metaheuristics
 
@@ -31,3 +29,7 @@ Tabu Search is a local search algorithm that uses memory structures (tabu lists)
 - Aspiration criteria to override tabu status for promising solutions
 - Neighborhood exploration strategies focusing on conflicting vertices
 - Diversification mechanisms to explore different regions of the search space
+
+# To run the project : 
+`pip install networkx`  
+`python main.py`
